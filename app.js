@@ -4,6 +4,8 @@ import router from './routes/user_routes.js';
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/api/users',router);
 
 mongoose.connect('mongodb+srv://admin:admin12345@learn-backend.xjkln00.mongodb.net/?retryWrites=true&w=majority&appName=learn-backend')
