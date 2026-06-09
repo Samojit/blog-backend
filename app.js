@@ -1,20 +1,26 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import 'dotenv/config';
 import router from './routes/user_routes.js';
 import blogRouter from './routes/blog_routes.js';
 
 const app = express();
+const PORT = process.env.PORT || 7001;
+const MONGO_URI = process.env.MONGO_URI;
 
 app.use(express.json());
 
-app.use('/api/users',router);
-app.use('/api/blogs',blogRouter);
+app.use('/api/users', router);
+app.use('/api/blogs', blogRouter);
 
-mongoose.connect('mongodb+srv://admin:admin12345@learn-backend.xjkln00.mongodb.net/?retryWrites=true&w=majority&appName=learn-backend')
-  .then(() => app.listen(3000)).then(() => console.log('Connected to database and server listening on port 3000'));
-
-
-
-// app.use("/",(req,res,next)=>{
-//     res.send("Hello, world!");
-// })
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Connected to MongoDB`);
+    });
+  })
+  .catch((err) => {
+    console.error('MongoDB connection failed:', err.message);
+    process.exit(1);
+  });

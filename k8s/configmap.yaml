@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog-backend-config
+data:
+  MONGO_URI: "mongodb://mongo-service:27017/blog-backend"
+  PORT: "7001"

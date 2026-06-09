@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - "7001:7001"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    restart:
+      on-failure
+    
+  mongo:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog-backend-config
+data:
+    MONGO_URI: "mongodb://mongo-service:{{ .Values.mongo.port }}/{{ .Values.mongo.database }}"
+    PORT: {{ .Values.app.port | quote }}

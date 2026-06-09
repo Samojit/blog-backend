@@ -1,0 +1,18 @@
+app:
+  name: blog-app
+  image: blog-app:latest
+  replicas: 2
+  port: 7001
+
+mongo:
+  image: mongo:7
+  port: 27017
+  database: blog-backend
+  storage: 1Gi
+
+ingress:
+  host: blog.local
+
+service:
+  port: 80
+  nodePort: 30001

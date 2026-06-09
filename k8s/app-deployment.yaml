@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog-app
+  template:
+    metadata:
+      labels:
+        app: blog-app
+    spec:
+      containers:
+        - name: blog-app
+          image: blog-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7001
+          envFrom:
+            - configMapRef:
+                name: blog-backend-config
+            - secretRef:
+                name: blog-backend-secret
